@@ -1,27 +1,23 @@
 var phonecatControllers = angular.module('phonecatControllers', ['templateservicemod', 'navigationservice']);
 
-phonecatControllers.controller('login', ['$scope', 'TemplateService', 'NavigationService',
-  function ($scope, TemplateService, NavigationService) {
-        $scope.template = TemplateService;
-        TemplateService.list = 3;
-  }]);
+phonecatControllers.controller('HeaderController', function($scope, TemplateService, NavigationService, $timeout) {
+  $scope.template = TemplateService;
+});
 
+phonecatControllers.controller('LoginController', function($scope, TemplateService, NavigationService, $timeout) {
+  $scope.template = TemplateService.changecontent("login");
+  $scope.menutitle = NavigationService.makeactive("Login");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+});
 
-phonecatControllers.controller('headerctrl', ['$scope', 'TemplateService',
- function ($scope, TemplateService) {
-        $scope.template = TemplateService;
-        $scope.loginpage = function () {
-            location.href = '#/login.html';
-        };
-  }]);
+phonecatControllers.controller('HomeController', function($scope, TemplateService, NavigationService, $timeout) {
+  $scope.template = TemplateService.changecontent("home");
+  $scope.menutitle = NavigationService.makeactive("Home");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+});
 
-phonecatControllers.controller('sidemenuCtrl',
-    function ($scope, TemplateService, NavigationService) {
-        $scope.template = TemplateService;
-        $scope.navigation = NavigationService.getNav();
-
-        $scope.changeMenuShow = function (menu) {
-            menu.show = !menu.show;
-        };
-
-    });
+phonecatControllers.controller('SideMenuController', function($scope, TemplateService, NavigationService, $timeout) {
+  $scope.template = TemplateService;
+});
