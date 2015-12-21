@@ -1,25 +1,27 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngSanitize', 'angular-flexslider'])
+var phonecatControllers = angular.module('phonecatControllers', ['templateservicemod', 'navigationservice']);
 
-.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
-  //Used to name the .html file
-  $scope.template = TemplateService.changecontent("home");
-  $scope.menutitle = NavigationService.makeactive("Home");
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
+phonecatControllers.controller('login', ['$scope', 'TemplateService', 'NavigationService',
+  function ($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        TemplateService.list = 3;
+  }]);
 
-  $scope.mySlides = [
-    'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg',
-    'http://flexslider.woothemes.com/images/kitchen_adventurer_lemon.jpg',
-    'http://flexslider.woothemes.com/images/kitchen_adventurer_donut.jpg',
-    'http://flexslider.woothemes.com/images/kitchen_adventurer_caramel.jpg'
-  ];
-})
 
-.controller('headerctrl', function($scope, TemplateService) {
-  $scope.template = TemplateService;
-  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-    $(window).scrollTop(0);
-  });
-})
+phonecatControllers.controller('headerctrl', ['$scope', 'TemplateService',
+ function ($scope, TemplateService) {
+        $scope.template = TemplateService;
+        $scope.loginpage = function () {
+            location.href = '#/login.html';
+        };
+  }]);
 
-;
+phonecatControllers.controller('sidemenuCtrl',
+    function ($scope, TemplateService, NavigationService) {
+        $scope.template = TemplateService;
+        $scope.navigation = NavigationService.getNav();
+
+        $scope.changeMenuShow = function (menu) {
+            menu.show = !menu.show;
+        };
+
+    });

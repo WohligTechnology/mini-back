@@ -11,15 +11,15 @@ firstapp.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     // for http request with session
     $httpProvider.defaults.withCredentials = true;
 
-    $stateProvider
+    $stateProvider.
 
-    .state('home', {
-        url: "/home",
-        templateUrl: "views/template.html",
-        controller: 'HomeCtrl'
-    })
+       when('/login', {
+            templateUrl: 'views/content/login.html',
+            controller: 'login'
+        }).
 
-    $urlRouterProvider.otherwise("/home");
+
+    $urlRouterProvider.otherwise("/content/login");
 
 });
 
